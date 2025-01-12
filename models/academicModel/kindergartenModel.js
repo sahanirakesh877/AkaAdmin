@@ -9,9 +9,7 @@ const KinderGartenSchema = new mongoose.Schema(
     bucket: { type: String },
     mime: { type: String },
   },
-  {
-    timestamps: true,
-  }
+ 
 );
 
 const KinderGarten = mongoose.model("KinderGarten School", KinderGartenSchema);

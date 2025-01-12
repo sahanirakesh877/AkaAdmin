@@ -6,7 +6,7 @@ import BrandLogo from "../../models/brandModel.js";
 import User from "../../models/GetTouchModel.js";
 import Users from "../../models/UserModel.js";
 import Blog from "../../models/blogModel.js";
-import Category from "../../models/categoryModel.js";
+
 import HeroSlider from "../../models/HeroModel.js";
 import Career from "../../models/careerModel.js";
 import Application from "../../models/applicationModel.js";
@@ -1033,52 +1033,7 @@ export const Resources = [
       }),
     ],
   },
-  // 2. category config
-  {
-    resource: Category,
-    options: {
-      navigation: { name: "BlogsModel", icon: "Image" },
 
-      actions: {
-        list: {
-          isAccessible: ({ currentAdmin }) => {
-            // admin, sub-admin, and editor can view the list
-            return (
-              currentAdmin &&
-              (currentAdmin.role === "admin" ||
-                currentAdmin.role === "sub-admin")
-            );
-          },
-        },
-        new: {
-          isAccessible: ({ currentAdmin }) => {
-            // Only admin and sub-admin can create new brand logos
-            return (
-              currentAdmin &&
-              (currentAdmin.role === "admin" ||
-                currentAdmin.role === "sub-admin")
-            );
-          },
-        },
-        edit: {
-          isAccessible: ({ currentAdmin }) => {
-            // admin, sub-admin, and editor can edit brand logos
-            return (
-              currentAdmin &&
-              (currentAdmin.role === "admin" ||
-                currentAdmin.role === "sub-admin")
-            );
-          },
-        },
-        delete: {
-          isAccessible: ({ currentAdmin }) => {
-            // Only admin can delete brand logos
-            return currentAdmin && currentAdmin.role === "admin";
-          },
-        },
-      },
-    },
-  },
   // 3.  activity  section
   {
     resource: Activity,

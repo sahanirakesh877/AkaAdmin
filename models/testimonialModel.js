@@ -30,9 +30,7 @@ const testimonialSchema = new mongoose.Schema(
       type: String,
     },
   },
-  {
-    timestamps: true,
-  }
+
 );
 
 // Create a model from the schema

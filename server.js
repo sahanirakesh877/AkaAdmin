@@ -34,7 +34,6 @@ import authenticate from "./middleware/authenticateUser.js";
 
 import Blog from "./routes/blog/blogRoute.js";
 import Activity from "./routes/blog/activitRoute.js";
-import Category from "./routes/blog/categoryRoute.js";
 import CreativeWeek from "./routes/blog/creativeRoute.js";
 
 import amun from "./routes/academic/amunRoute.js";
@@ -96,8 +95,8 @@ const start = async () => {
   // blog  routes
   app.use("/api/blog", Blog);
   app.use("/api/activity", Activity);
-  app.use("/api/category", Category);
-  app.use("/api/creativeWeek", CreativeWeek);
+
+  app.use("/api/creativeweek", CreativeWeek);
   // media  routes
   app.use("/api/galleries", galleryRoutes);
   app.use("/api/hero", heroRoutes);

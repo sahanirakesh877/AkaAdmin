@@ -22,9 +22,7 @@ const CareerSchema = new mongoose.Schema(
       default: true,
     },
   },
-  {
-    timestamps: true,
-  }
+
 );
 
 // Create the model based on the schema

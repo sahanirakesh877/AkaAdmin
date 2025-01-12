@@ -24,9 +24,7 @@ const brandLogoSchema = new mongoose.Schema(
       type: String,
     },
   },
-  {
-    timestamps: true,
-  }
+  
 );
 
 const BrandLogo = mongoose.model("Brand Partner", brandLogoSchema);

@@ -9,9 +9,7 @@ const amunSchema = new mongoose.Schema(
     bucket: { type: String },
     mime: { type: String },
   },
-  {
-    timestamps: true,
-  }
+ 
 );
 
 const Amun = mongoose.model("AMUN", amunSchema);

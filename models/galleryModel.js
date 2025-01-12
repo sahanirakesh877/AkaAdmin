@@ -13,9 +13,7 @@ const gallerySchema = new mongoose.Schema(
     bucket: { type: String },
     mime: { type: String },
   },
-  {
-    timestamps: true,
-  }
+ 
 );
 
 const Gallery = mongoose.model("Gallery", gallerySchema);

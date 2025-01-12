@@ -10,11 +10,7 @@ const blogSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    categoryID: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      required: true,
-    },
+   
 
     image: {
       type: String,

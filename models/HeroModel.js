@@ -16,9 +16,7 @@ const heroImageSchema = new mongoose.Schema(
       type: String,
     },
   },
-  {
-    timestamps: true,
-  }
+ 
 );
 
 const HeroImage = mongoose.model("HeroImage", heroImageSchema);
