@@ -3,7 +3,7 @@ import Career from "../../models/careerModel.js";
 // Get all career posts
 export const getCareerPosts = async (req, res) => {
   try {
-    const careerPosts = await Career.find(); // Retrieve all career posts
+    const careerPosts = await Career.find().sort({ createdAt: -1 }); // Retrieve all career posts
     if (careerPosts.length === 0) {
       return res.status(404).json({ message: "No career posts found" });
     }

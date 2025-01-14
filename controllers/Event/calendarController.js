@@ -3,7 +3,7 @@ import Calendar from "../../models/calendarModel.js";
 // Get all galleries
 export const getCalendar = async (req, res) => {
   try {
-    const calendar = await Calendar.find();
+    const calendar = await Calendar.find().sort({ createdAt: -1 });
     if (calendar.length == 0) {
       return res.status(404).json({ message: "No Calendar found" });
     }

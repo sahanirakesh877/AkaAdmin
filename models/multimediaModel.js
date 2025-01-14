@@ -15,7 +15,9 @@ const multimediaSchema = new mongoose.Schema(
       type: [String],
     },
   },
- 
+  {
+    timestamps: true,
+  }
 );
 
 const Multimedia = mongoose.model("Multimedia", multimediaSchema);

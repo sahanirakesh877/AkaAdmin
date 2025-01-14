@@ -3,7 +3,7 @@ import HeroImage from "../../models/HeroModel.js";
 // Get all galleries
 export const getHeros = async (req, res) => {
   try {
-    const heros = await HeroImage.find();
+    const heros = await HeroImage.find().sort({ createdAt: -1 });
     if (heros.length == 0) {
       return res.status(404).json({ message: "No heros found" });
     }

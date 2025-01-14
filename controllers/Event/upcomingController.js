@@ -3,7 +3,7 @@ import Upcoming from "../../models/upcomingEventModel.js";
 // Get all galleries
 export const getUpcomingEvent = async (req, res) => {
   try {
-    const upcomingevent = await Upcoming.find();
+    const upcomingevent = await Upcoming.find().sort({ createdAt: -1 });
     if (upcomingevent.length == 0) {
       return res.status(404).json({ message: "No upcomingevent found" });
     }

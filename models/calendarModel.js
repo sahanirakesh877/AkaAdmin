@@ -13,7 +13,9 @@ const EventSchema = new mongoose.Schema(
     },
 
   },
-
+  {
+    timestamps: true,
+  }
 );
 
 // Define the Calendar Schema with Month and Events

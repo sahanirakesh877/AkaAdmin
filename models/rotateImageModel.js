@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
-const KinderGartenSchema = new mongoose.Schema(
+const RotategallerySchema = new mongoose.Schema(
   {
+    
     image: {
       type: String,
     },
@@ -14,6 +15,6 @@ const KinderGartenSchema = new mongoose.Schema(
   }
 );
 
-const KinderGarten = mongoose.model("KinderGarten School", KinderGartenSchema);
+const RotateImage = mongoose.model("RotateImage", RotategallerySchema);
 
-export default KinderGarten;
+export default RotateImage;

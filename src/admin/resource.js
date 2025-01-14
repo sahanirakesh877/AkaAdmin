@@ -16,17 +16,16 @@ import Activity from "../../models/activityModel.js";
 import Creative from "../../models/creativeModel.js";
 import NoticeImage from "../../models/noticeModel.js";
 import Testimonial from "../../models/testimonialModel.js";
-import Team from "../../models/teamModel.js"
+import Team from "../../models/teamModel.js";
 import Calendar from "../../models/calendarModel.js";
 import UpcomingEvent from "../../models/upcomingEventModel.js";
 import LongtermProject from "../../models/longtermProjectModel.js";
-import KinderGarten from './../../models/academicModel/kindergartenModel.js';
-import ElementarySchool from "../../models/academicModel/elementaryModel.js"
-import MiddleSchool from "../../models/academicModel/middleschoolModel.js"
-import SeniorSchool from "../../models/academicModel/seniorschoolModel.js"
-import Amun from "../../models/academicModel/amunModel.js"
-import GetEnquiry from "../../models/getInquiryModel.js"
-
+import KinderGarten from "./../../models/academicModel/kindergartenModel.js";
+import ElementarySchool from "../../models/academicModel/elementaryModel.js";
+import MiddleSchool from "../../models/academicModel/middleschoolModel.js";
+import SeniorSchool from "../../models/academicModel/seniorschoolModel.js";
+import Amun from "../../models/academicModel/amunModel.js";
+import GetEnquiry from "../../models/getInquiryModel.js";
 
 const localProvider = {
   bucket: "public/uploads",
@@ -61,6 +60,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -124,7 +125,7 @@ export const Resources = [
   },
   //2. for Notice section
   {
-    resource:NoticeImage,
+    resource: NoticeImage,
     options: {
       navigation: {
         name: "Media",
@@ -139,6 +140,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -217,6 +220,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -296,6 +301,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
 
       actions: {
@@ -378,6 +385,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -442,9 +451,7 @@ export const Resources = [
     ],
   },
 
-
-
-/*----------Calendar  resource management-------------*/
+  /*----------Calendar  resource management-------------*/
   //1. Calendar resource
   {
     resource: Calendar,
@@ -455,9 +462,9 @@ export const Resources = [
       },
       properties: {
         _id: { isVisible: false },
-     
-
-    },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
+      },
       actions: {
         list: {
           isAccessible: ({ currentAdmin }) => {
@@ -500,459 +507,463 @@ export const Resources = [
       },
     },
   },
- // 2. upcoming event resource
- {
-  resource: UpcomingEvent,
-  options: {
-    navigation: {
-      name: "Events and Activities",
-      icon: "School",
-    },
-    properties: {
-      _id: { isVisible: false },
-   
-
-  },
-    actions: {
-      list: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can view the list
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
-        },
+  // 2. upcoming event resource
+  {
+    resource: UpcomingEvent,
+    options: {
+      navigation: {
+        name: "Events and Activities",
+        icon: "School",
       },
-      new: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin and sub-admin can create new brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin")
-          );
-        },
-      },
-      edit: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can edit brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
-        },
-      },
-      delete: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin can delete brand logos
-          return currentAdmin && currentAdmin.role === "admin";
-        },
-      },
-    },
-  },
-},
-
-
-/*---------------Academic   management------------------*/
-// 1. KinderGarten section
-{
-  resource: KinderGarten,
-  options: {
-    navigation: {
-      name: "Academic Management",
-      icon: "camera",
-    },
-    properties: {
-      _id: { isVisible: false },
-      image: {
-        type: "file",
-        isVisible: { list: true, edit: true, filter: true, show: true },
-      },
-      imageKey: { isVisible: false },
-      bucket: { isVisible: false },
-      mime: { isVisible: false },
-    },
-    actions: {
-      list: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can view the list
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
-        },
-      },
-      new: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin and sub-admin can create new brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin")
-          );
-        },
-      },
-      edit: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can edit brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
-        },
-      },
-      delete: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin can delete brand logos
-          return currentAdmin && currentAdmin.role === "admin";
-        },
-      },
-    },
-  },
-  features: [
-    uploadFeature({
-      provider: { local: localProvider },
-      componentLoader,
       properties: {
-        filePath: "image",
-        key: "imageKey",
-        bucket: "bucket",
-        mimeType: "mime",
+        _id: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
-      validation: {
-        mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
-      },
-      uploadPath(record, filename) {
-        return `${filename}`;
-      },
-    }),
-  ],
-},
-// 2. ElementarySchool section
-{
-  resource: ElementarySchool,
-  options: {
-    navigation: {
-      name: "Academic Management",
-      icon: "camera",
-    },
-    properties: {
-      _id: { isVisible: false },
-      image: {
-        type: "file",
-        isVisible: { list: true, edit: true, filter: true, show: true },
-      },
-      imageKey: { isVisible: false },
-      bucket: { isVisible: false },
-      mime: { isVisible: false },
-    },
-    actions: {
-      list: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can view the list
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
+      actions: {
+        list: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can view the list
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
         },
-      },
-      new: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin and sub-admin can create new brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin")
-          );
+        new: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin and sub-admin can create new brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin")
+            );
+          },
         },
-      },
-      edit: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can edit brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
+        edit: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can edit brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
         },
-      },
-      delete: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin can delete brand logos
-          return currentAdmin && currentAdmin.role === "admin";
+        delete: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin can delete brand logos
+            return currentAdmin && currentAdmin.role === "admin";
+          },
         },
       },
     },
   },
-  features: [
-    uploadFeature({
-      provider: { local: localProvider },
-      componentLoader,
+
+  /*---------------Academic   management------------------*/
+  // 1. KinderGarten section
+  {
+    resource: KinderGarten,
+    options: {
+      navigation: {
+        name: "Academic Management",
+        icon: "camera",
+      },
       properties: {
-        filePath: "image",
-        key: "imageKey",
-        bucket: "bucket",
-        mimeType: "mime",
-      },
-      validation: {
-        mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
-      },
-      uploadPath(record, filename) {
-        return `${filename}`;
-      },
-    }),
-  ],
-},
-// 3.Middle School section
-{
-  resource: MiddleSchool,
-  options: {
-    navigation: {
-      name: "Academic Management",
-      icon: "camera",
-    },
-    properties: {
-      _id: { isVisible: false },
-      image: {
-        type: "file",
-        isVisible: { list: true, edit: true, filter: true, show: true },
-      },
-      imageKey: { isVisible: false },
-      bucket: { isVisible: false },
-      mime: { isVisible: false },
-    },
-    actions: {
-      list: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can view the list
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
+        _id: { isVisible: false },
+        image: {
+          type: "file",
+          isVisible: { list: true, edit: true, filter: true, show: true },
         },
+        imageKey: { isVisible: false },
+        bucket: { isVisible: false },
+        mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
-      new: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin and sub-admin can create new brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin")
-          );
+      actions: {
+        list: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can view the list
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
         },
-      },
-      edit: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can edit brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
+        new: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin and sub-admin can create new brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin")
+            );
+          },
         },
-      },
-      delete: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin can delete brand logos
-          return currentAdmin && currentAdmin.role === "admin";
+        edit: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can edit brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        delete: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin can delete brand logos
+            return currentAdmin && currentAdmin.role === "admin";
+          },
         },
       },
     },
+    features: [
+      uploadFeature({
+        provider: { local: localProvider },
+        componentLoader,
+        properties: {
+          filePath: "image",
+          key: "imageKey",
+          bucket: "bucket",
+          mimeType: "mime",
+        },
+        validation: {
+          mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
+        },
+        uploadPath(record, filename) {
+          return `${filename}`;
+        },
+      }),
+    ],
   },
-  features: [
-    uploadFeature({
-      provider: { local: localProvider },
-      componentLoader,
+  // 2. ElementarySchool section
+  {
+    resource: ElementarySchool,
+    options: {
+      navigation: {
+        name: "Academic Management",
+        icon: "camera",
+      },
       properties: {
-        filePath: "image",
-        key: "imageKey",
-        bucket: "bucket",
-        mimeType: "mime",
-      },
-      validation: {
-        mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
-      },
-      uploadPath(record, filename) {
-        return `${filename}`;
-      },
-    }),
-  ],
-},
-// 4.Senior School section
-{
-  resource: SeniorSchool,
-  options: {
-    navigation: {
-      name: "Academic Management",
-      icon: "camera",
-    },
-    properties: {
-      _id: { isVisible: false },
-      image: {
-        type: "file",
-        isVisible: { list: true, edit: true, filter: true, show: true },
-      },
-      imageKey: { isVisible: false },
-      bucket: { isVisible: false },
-      mime: { isVisible: false },
-    },
-    actions: {
-      list: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can view the list
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
+        _id: { isVisible: false },
+        image: {
+          type: "file",
+          isVisible: { list: true, edit: true, filter: true, show: true },
         },
+        imageKey: { isVisible: false },
+        bucket: { isVisible: false },
+        mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
-      new: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin and sub-admin can create new brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin")
-          );
+      actions: {
+        list: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can view the list
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
         },
-      },
-      edit: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can edit brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
+        new: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin and sub-admin can create new brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin")
+            );
+          },
         },
-      },
-      delete: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin can delete brand logos
-          return currentAdmin && currentAdmin.role === "admin";
+        edit: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can edit brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        delete: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin can delete brand logos
+            return currentAdmin && currentAdmin.role === "admin";
+          },
         },
       },
     },
+    features: [
+      uploadFeature({
+        provider: { local: localProvider },
+        componentLoader,
+        properties: {
+          filePath: "image",
+          key: "imageKey",
+          bucket: "bucket",
+          mimeType: "mime",
+        },
+        validation: {
+          mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
+        },
+        uploadPath(record, filename) {
+          return `${filename}`;
+        },
+      }),
+    ],
   },
-  features: [
-    uploadFeature({
-      provider: { local: localProvider },
-      componentLoader,
+  // 3.Middle School section
+  {
+    resource: MiddleSchool,
+    options: {
+      navigation: {
+        name: "Academic Management",
+        icon: "camera",
+      },
       properties: {
-        filePath: "image",
-        key: "imageKey",
-        bucket: "bucket",
-        mimeType: "mime",
-      },
-      validation: {
-        mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
-      },
-      uploadPath(record, filename) {
-        return `${filename}`;
-      },
-    }),
-  ],
-},
-// 4.Amun section
-{
-  resource: Amun,
-  options: {
-    navigation: {
-      name: "Academic Management",
-      icon: "camera",
-    },
-    properties: {
-      _id: { isVisible: false },
-      image: {
-        type: "file",
-        isVisible: { list: true, edit: true, filter: true, show: true },
-      },
-      imageKey: { isVisible: false },
-      bucket: { isVisible: false },
-      mime: { isVisible: false },
-    },
-    actions: {
-      list: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can view the list
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
+        _id: { isVisible: false },
+        image: {
+          type: "file",
+          isVisible: { list: true, edit: true, filter: true, show: true },
         },
+        imageKey: { isVisible: false },
+        bucket: { isVisible: false },
+        mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
-      new: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin and sub-admin can create new brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin")
-          );
+      actions: {
+        list: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can view the list
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
         },
-      },
-      edit: {
-        isAccessible: ({ currentAdmin }) => {
-          // admin, sub-admin, and editor can edit brand logos
-          return (
-            currentAdmin &&
-            (currentAdmin.role === "admin" ||
-              currentAdmin.role === "sub-admin" ||
-              currentAdmin.role === "editor")
-          );
+        new: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin and sub-admin can create new brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin")
+            );
+          },
         },
-      },
-      delete: {
-        isAccessible: ({ currentAdmin }) => {
-          // Only admin can delete brand logos
-          return currentAdmin && currentAdmin.role === "admin";
+        edit: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can edit brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        delete: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin can delete brand logos
+            return currentAdmin && currentAdmin.role === "admin";
+          },
         },
       },
     },
+    features: [
+      uploadFeature({
+        provider: { local: localProvider },
+        componentLoader,
+        properties: {
+          filePath: "image",
+          key: "imageKey",
+          bucket: "bucket",
+          mimeType: "mime",
+        },
+        validation: {
+          mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
+        },
+        uploadPath(record, filename) {
+          return `${filename}`;
+        },
+      }),
+    ],
   },
-  features: [
-    uploadFeature({
-      provider: { local: localProvider },
-      componentLoader,
+  // 4.Senior School section
+  {
+    resource: SeniorSchool,
+    options: {
+      navigation: {
+        name: "Academic Management",
+        icon: "camera",
+      },
       properties: {
-        filePath: "image",
-        key: "imageKey",
-        bucket: "bucket",
-        mimeType: "mime",
+        _id: { isVisible: false },
+        image: {
+          type: "file",
+          isVisible: { list: true, edit: true, filter: true, show: true },
+        },
+        imageKey: { isVisible: false },
+        bucket: { isVisible: false },
+        mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
-      validation: {
-        mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
+      actions: {
+        list: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can view the list
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        new: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin and sub-admin can create new brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin")
+            );
+          },
+        },
+        edit: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can edit brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        delete: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin can delete brand logos
+            return currentAdmin && currentAdmin.role === "admin";
+          },
+        },
       },
-      uploadPath(record, filename) {
-        return `${filename}`;
+    },
+    features: [
+      uploadFeature({
+        provider: { local: localProvider },
+        componentLoader,
+        properties: {
+          filePath: "image",
+          key: "imageKey",
+          bucket: "bucket",
+          mimeType: "mime",
+        },
+        validation: {
+          mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
+        },
+        uploadPath(record, filename) {
+          return `${filename}`;
+        },
+      }),
+    ],
+  },
+  // 4.Amun section
+  {
+    resource: Amun,
+    options: {
+      navigation: {
+        name: "Academic Management",
+        icon: "camera",
       },
-    }),
-  ],
-},
-
-
-
-
-
+      properties: {
+        _id: { isVisible: false },
+        image: {
+          type: "file",
+          isVisible: { list: true, edit: true, filter: true, show: true },
+        },
+        imageKey: { isVisible: false },
+        bucket: { isVisible: false },
+        mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
+      },
+      actions: {
+        list: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can view the list
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        new: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin and sub-admin can create new brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin")
+            );
+          },
+        },
+        edit: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can edit brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        delete: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin can delete brand logos
+            return currentAdmin && currentAdmin.role === "admin";
+          },
+        },
+      },
+    },
+    features: [
+      uploadFeature({
+        provider: { local: localProvider },
+        componentLoader,
+        properties: {
+          filePath: "image",
+          key: "imageKey",
+          bucket: "bucket",
+          mimeType: "mime",
+        },
+        validation: {
+          mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
+        },
+        uploadPath(record, filename) {
+          return `${filename}`;
+        },
+      }),
+    ],
+  },
 
   /*-------------------for blog and activity  section -------------------------------*/
   // 1.  blog  section
@@ -972,6 +983,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -1051,6 +1064,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -1129,6 +1144,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -1190,8 +1207,8 @@ export const Resources = [
       }),
     ],
   },
-   // 5.  LongTerm Project  section
-   {
+  // 5.  LongTerm Project  section
+  {
     resource: LongtermProject,
     options: {
       navigation: {
@@ -1207,6 +1224,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -1269,17 +1288,14 @@ export const Resources = [
     ],
   },
 
-
-
-
-   /*-------------------for Testimonial  section -----------------------*/
+  /*-------------------for Testimonial  section -----------------------*/
   // 1.  Testimonial  section
   {
     resource: Testimonial,
     options: {
       navigation: {
         name: "Testimonial & Team",
-        icon: "User"
+        icon: "User",
       },
       properties: {
         _id: { isVisible: false },
@@ -1290,6 +1306,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -1352,13 +1370,13 @@ export const Resources = [
     ],
   },
 
-   // 2.  Team  section
-   {
+  // 2.  Team  section
+  {
     resource: Team,
     options: {
       navigation: {
         name: "Testimonial & Team",
-        icon: "User"
+        icon: "User",
       },
       properties: {
         _id: { isVisible: false },
@@ -1369,6 +1387,8 @@ export const Resources = [
         imageKey: { isVisible: false },
         bucket: { isVisible: false },
         mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -1430,8 +1450,6 @@ export const Resources = [
       }),
     ],
   },
-
-
 
   /*-------------------------------Career model management--------------------*/
   // 1. Application config
@@ -1439,7 +1457,11 @@ export const Resources = [
     resource: Application,
     options: {
       navigation: { name: "Careers", icon: "Briefcase" },
-
+      properties: {
+        _id: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
+      },
       actions: {
         list: {
           isAccessible: ({ currentAdmin }) => {
@@ -1485,6 +1507,11 @@ export const Resources = [
     resource: Career,
     options: {
       navigation: { name: "Careers", icon: "Briefcase" },
+      properties: {
+        _id: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
+      },
 
       actions: {
         list: {
@@ -1557,13 +1584,6 @@ export const Resources = [
       },
     },
   },
-
-
-
-
-
-
-
 
   /*------------communication and engagement functions--------------------*/
   // 1. contact section
@@ -1673,7 +1693,6 @@ export const Resources = [
       navigation: { name: "Communication", icon: "User" },
       properties: {
         _id: { isVisible: false },
-           
       },
       actions: {
         list: {
@@ -1717,9 +1736,6 @@ export const Resources = [
       },
     },
   },
-
-
-
 
   /*----------authentication on role based acces--------------------*/
 

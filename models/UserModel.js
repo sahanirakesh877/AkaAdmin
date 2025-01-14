@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
     default: "editor",
   },
   password: { type: String, required: true },
+} ,{
+  timestamps: true,
 });
 
 const Users = mongoose.model("User", userSchema);

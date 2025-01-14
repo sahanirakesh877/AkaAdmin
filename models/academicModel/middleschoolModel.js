@@ -9,7 +9,9 @@ const MiddleSchoolSchema = new mongoose.Schema(
     bucket: { type: String },
     mime: { type: String },
   },
-
+  {
+    timestamps: true,
+  }
 );
 
 const MiddleSchools = mongoose.model("Middle School", MiddleSchoolSchema);

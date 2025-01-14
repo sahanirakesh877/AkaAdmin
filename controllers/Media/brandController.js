@@ -5,7 +5,7 @@ import BrandLogo from "../../models/brandModel.js";
 // Get all brand logos
 export const getBrandLogos = async (req, res) => {
   try {
-    const brandLogos = await BrandLogo.find();
+    const brandLogos = await BrandLogo.find().sort({ createdAt: -1 });
     res.status(200).json({
       message: "Brand logos fetched successfully",
       brandLogos,

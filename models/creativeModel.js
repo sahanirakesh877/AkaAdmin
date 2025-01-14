@@ -20,7 +20,9 @@ const creativeSchema = new mongoose.Schema(
       type: String,
     },
   },
-
+  {
+    timestamps: true,
+  }
 );
 
 // Create and export the Program model

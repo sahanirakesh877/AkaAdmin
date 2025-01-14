@@ -25,7 +25,9 @@ const contactSchema = new mongoose.Schema(
       trim: true,
     },
   },
-  
+  {
+    timestamps: true,
+  }
 ); // Adds createdAt and updatedAt fields
 
 // Create the model based on the schema

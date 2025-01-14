@@ -3,7 +3,7 @@ import Notice from "../../models/noticeModel.js";
 // Get all galleries
  export const getNotice = async (req, res) => {
   try {
-    const notice = await Notice.find();
+    const notice = await Notice.find().sort({ createdAt: -1 });
     if (notice.length == 0) {
       return res.status(404).json({ message: "No notice found" });
     }

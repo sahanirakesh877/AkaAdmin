@@ -40,7 +40,9 @@ const ApplicationSchema = new mongoose.Schema(
       ref: "Career",
     },
   },
-
+  {
+    timestamps: true,
+  }
 );
 
 // Create the model based on the schema
