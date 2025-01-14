@@ -6,29 +6,26 @@ const contactSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      trim: true,
+      required: true,
     },
     email: {
       type: String,
-
-      trim: true,
+      required: true,
       lowercase: true,
     },
     phone: {
       type: Number,
-
-      trim: true,
+      required: true,
     },
     message: {
       type: String,
-
-      trim: true,
+      required: true,
     },
   },
   {
     timestamps: true,
   }
-); // Adds createdAt and updatedAt fields
+); 
 
 // Create the model based on the schema
 const Contact = mongoose.model("Contact", contactSchema);

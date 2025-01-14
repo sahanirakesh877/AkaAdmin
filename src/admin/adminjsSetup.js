@@ -11,7 +11,7 @@ const logo='/logo.png';
 const admin = new AdminJS({
   rootPath: "/admin",
   branding: {
-    companyName: 'ThunderBolts', 
+    companyName: 'Aksharaa School', 
     logo: logo, 
   },
   componentLoader,

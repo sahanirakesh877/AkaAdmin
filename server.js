@@ -16,7 +16,8 @@ import heroRoutes from "./routes/media/heroRoute.js";
 import brandLogoRoutes from "./routes/media/brandRoute.js";
 import notice from "./routes/media/noticeRoute.js";
 import multimedia from "./routes/media/multimediaRoute.js";
-
+import rotateImage from "./routes/media/rotateImageRoute.js";
+import resultPDF from "./routes/media/resultRoute.js";
 import contactRoutes from "./routes/communication/contactRoute.js";
 import getTouchRoutes from "./routes/communication/getTouchRoute.js";
 import inquiryRoutes from "./routes/communication/inquiryRoute.js";
@@ -103,9 +104,12 @@ const start = async () => {
   app.use("/api/brandlogos", brandLogoRoutes);
   app.use("/api/notice", notice);
   app.use("/api/multimedia", multimedia);
+  app.use("/api/rotateimage", rotateImage);
+  app.use("/api/result", resultPDF);
+
   // communication routes
   app.use("/api/contact", contactRoutes);
-  app.use("/api/getintouch", getTouchRoutes);
+  app.use("/api/subscribe", getTouchRoutes);
   app.use("/api/inquiry", inquiryRoutes);
   // events
   app.use("/api/calendar", calendarRoute);
@@ -133,6 +137,18 @@ const start = async () => {
     } else {
       res.status(404).send("Not Found");
     }
+  });
+
+  app.get('/downloads/:fileName', (req, res) => {
+    const fileName = req.params.fileName;
+    const filePath = path.join(__dirname, 'uploads/pdf_uploads', fileName); // Adjust path if necessary
+    
+    // Set proper headers for file download
+    res.download(filePath, (err) => {
+      if (err) {
+        res.status(500).send("Error in file download");
+      }
+    });
   });
 
   // Start the server

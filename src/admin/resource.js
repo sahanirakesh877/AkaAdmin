@@ -6,7 +6,7 @@ import BrandLogo from "../../models/brandModel.js";
 import User from "../../models/GetTouchModel.js";
 import Users from "../../models/UserModel.js";
 import Blog from "../../models/blogModel.js";
-
+import RotateImage from "../../models/rotateImageModel.js";
 import HeroSlider from "../../models/HeroModel.js";
 import Career from "../../models/careerModel.js";
 import Application from "../../models/applicationModel.js";
@@ -26,6 +26,7 @@ import MiddleSchool from "../../models/academicModel/middleschoolModel.js";
 import SeniorSchool from "../../models/academicModel/seniorschoolModel.js";
 import Amun from "../../models/academicModel/amunModel.js";
 import GetEnquiry from "../../models/getInquiryModel.js";
+import PDF from "../../models/resultModel.js";
 
 const localProvider = {
   bucket: "public/uploads",
@@ -203,7 +204,7 @@ export const Resources = [
       }),
     ],
   },
-  // for gallery section
+  //3. for gallery section
   {
     resource: Gallery,
     options: {
@@ -283,7 +284,87 @@ export const Resources = [
       }),
     ],
   },
-  //3. for brand logo
+  //4. for gallery section
+  {
+    resource: RotateImage,
+    options: {
+      navigation: {
+        name: "Media",
+        icon: "Image",
+      },
+      properties: {
+        _id: { isVisible: false },
+        image: {
+          type: "file",
+          isVisible: { list: true, edit: true, filter: true, show: true },
+        },
+        imageKey: { isVisible: false },
+        bucket: { isVisible: false },
+        mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
+      },
+      actions: {
+        list: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can view the list
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        new: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin and sub-admin can create new brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin")
+            );
+          },
+        },
+        edit: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can edit brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        delete: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin can delete brand logos
+            return currentAdmin && currentAdmin.role === "admin";
+          },
+        },
+      },
+    },
+    features: [
+      uploadFeature({
+        provider: { local: localProvider },
+        componentLoader,
+        properties: {
+          filePath: "image",
+          key: "imageKey",
+          bucket: "bucket",
+          mimeType: "mime",
+        },
+        validation: {
+          mimeTypes: ["image/png", "image/jpeg", "image/jpg"],
+        },
+        uploadPath(record, filename) {
+          return `${filename}`;
+        },
+      }),
+    ],
+  },
+  //5. for brand logo
   {
     resource: BrandLogo,
     options: {
@@ -366,7 +447,90 @@ export const Resources = [
       }),
     ],
   },
-  // 4.  for multimedia upload
+  //6. for pdf download logo
+  {
+    resource: PDF,
+    options: {
+      navigation: {
+        name: "Media",
+        icon: "Camera",
+      },
+      properties: {
+        _id: { isVisible: false },
+        resultPdf: {
+          type: "file",
+          isVisible: { list: true, edit: true, filter: true, show: true },
+        },
+
+        pdfKey: { isVisible: false },
+        bucket: { isVisible: false },
+        mime: { isVisible: false },
+        createdAt: { isVisible: false },
+        updatedAt: { isVisible: false },
+      },
+
+      actions: {
+        list: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can view the list
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        new: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin and sub-admin can create new brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin")
+            );
+          },
+        },
+        edit: {
+          isAccessible: ({ currentAdmin }) => {
+            // admin, sub-admin, and editor can edit brand logos
+            return (
+              currentAdmin &&
+              (currentAdmin.role === "admin" ||
+                currentAdmin.role === "sub-admin" ||
+                currentAdmin.role === "editor")
+            );
+          },
+        },
+        delete: {
+          isAccessible: ({ currentAdmin }) => {
+            // Only admin can delete brand logos
+            return currentAdmin && currentAdmin.role === "admin";
+          },
+        },
+      },
+    },
+    features: [
+      uploadFeature({
+        provider: { local: localProvider },
+        componentLoader,
+        properties: {
+          filePath: "resultPdf",
+          key: "pdfKey",
+          bucket: "bucket",
+          mimeType: "mime",
+        },
+
+        validation: {
+          mimeTypes: ["application/pdf"],
+        },
+        uploadPath(record, filename) {
+          return `pdf_uploads/${filename}`;
+        },
+      }),
+    ],
+  },
+  //7.  for multimedia upload
   {
     resource: Multimedia,
     options: {
@@ -985,6 +1149,10 @@ export const Resources = [
         mime: { isVisible: false },
         createdAt: { isVisible: false },
         updatedAt: { isVisible: false },
+        description:{
+          type: "richtext", isVisible: { list: true, edit: true, show: true },isRequired: true,
+          default: "Enter a description of the blog here...",
+        }
       },
       actions: {
         list: {
@@ -1066,6 +1234,10 @@ export const Resources = [
         mime: { isVisible: false },
         createdAt: { isVisible: false },
         updatedAt: { isVisible: false },
+        description:{
+          type: "richtext", isVisible: { list: true, edit: true, show: true },isRequired: true,
+          default: "Enter a description of the blog here...",
+        }
       },
       actions: {
         list: {
@@ -1593,6 +1765,11 @@ export const Resources = [
       navigation: { name: "Communication", icon: "User" },
       properties: {
         _id: { isVisible: false },
+        updatedAt: { isVisible: false },
+        name: { isVisible: true },
+        email: { isVisible: true },
+        phone: { isVisible: true },
+        message: { isVisible: true },
       },
       actions: {
         list: {
@@ -1643,6 +1820,7 @@ export const Resources = [
       navigation: { name: "Communication", icon: "User" },
       properties: {
         _id: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {
@@ -1693,6 +1871,7 @@ export const Resources = [
       navigation: { name: "Communication", icon: "User" },
       properties: {
         _id: { isVisible: false },
+        updatedAt: { isVisible: false },
       },
       actions: {
         list: {

@@ -4,34 +4,39 @@ import Inquiry from "../../models/getInquiryModel.js";
 export const createInquiry = async (req, res) => {
   try {
     const {
-      Studentname,
-      Studentage,
-      Studentgender,
-      StudentGrade,
-      Studentaddress,
-      Parentname,
-      Parentemail,
-      Parentphone,
-      Parentoccupation,
-      Parentaddress,
+      Sname,
+      Sage,
+      Sgender,
+      Sgrade,
+      Saddress,
+      Pname,
+      Pemail,
+      Pphone,
+      Poccupation,
+      Paddress,
       transportation,
       sourceOfInfo,
     } = req.body;
 
- 
+    // Validate required fields are present
+    if (!Sname || !Sage || !Sgender || !Sgrade || !Saddress || !Pname || !Pemail || !Pphone || !Poccupation || !Paddress || transportation === undefined || !sourceOfInfo) {
+      return res.status(400).json({
+        message: "All fields are required.",
+      });
+    }
 
     // Create a new inquiry document
     const newInquiry = new Inquiry({
-      Studentname,
-      Studentage,
-      Studentgender,
-      StudentGrade,
-      Studentaddress,
-      Parentname,
-      Parentemail,
-      Parentphone,
-      Parentoccupation,
-      Parentaddress,
+      Sname,
+      Sage,
+      Sgender,
+      Sgrade,
+      Saddress,
+      Pname,
+      Pemail,
+      Pphone,
+      Poccupation,
+      Paddress,
       transportation,
       sourceOfInfo,
     });
@@ -40,7 +45,7 @@ export const createInquiry = async (req, res) => {
     const savedInquiry = await newInquiry.save();
 
     res.status(201).json({
-      message: "Inquiry created successfully",
+      message: "Enquiry form sent successfully",
       inquiry: savedInquiry,
     });
   } catch (error) {

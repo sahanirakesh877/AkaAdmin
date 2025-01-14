@@ -2,9 +2,12 @@ import mongoose from "mongoose";
 
 const multimediaSchema = new mongoose.Schema(
   {
+    title: {
+      type: "string",
+    },
     images: {
-        type: [String], 
-      },
+      type: [String],
+    },
     imageKey: {
       type: [String],
     },
